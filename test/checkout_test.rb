@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require './lib/checkout'
 require './lib/rule'
@@ -9,8 +11,8 @@ class CheckoutTest < MiniTest::Unit::TestCase
     Rule.new(item: 'A', price: 50),
     Rule.new(item: 'B', price: 30),
     Rule.new(item: 'C', price: 20),
-    Rule.new(item: 'D', price: 15),
-  ]
+    Rule.new(item: 'D', price: 15)
+  ].freeze
 
   def price(goods)
     co = CheckOut.new(RULES)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Rule
   def initialize(item:, price:, quantity: 1)
     @item = item
