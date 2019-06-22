@@ -7,19 +7,19 @@ class CheckOut
   end
 
   def scan(item)
-    @item_counts[item] += 1
+    item_counts[item] += 1
   end
 
   def total
     total_cost = 0
 
-    item_counts.each_with_object(item_counts) { |(item, count), quantities|
+    items.each_with_object(item_counts.clone) do |item, quantities|
       rules.each do |rule|
-        amended_count, cost = rule.consume!(item, count)
-        quantities[item] = amended_count if amended_count != count
+        amended_count, cost = rule.consume!(item, quantities[item])
+        quantities[item] = amended_count
         total_cost += cost
       end
-    }
+    end
 
     total_cost
   end
@@ -27,4 +27,8 @@ class CheckOut
   private
 
   attr_reader :rules, :item_counts
+
+  def items
+    item_counts.keys
+  end
 end
